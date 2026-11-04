@@ -552,16 +552,6 @@ ${context || 'Информация временно недоступна.'}`;
 
   const leadData = extractLeadData(reply); 
   console.log('🔍 Проверка лида:', JSON.stringify(leadData));
-  if (!leadData.save) {
-    const phoneMatch = reply.match(/(\+?\d{10,15})/);
-    const nameMatch = reply.match(/(?:меня зовут|зовут|имя[:\s]+)\s*([А-ЯЁ][а-яё]+)/i);
-    if (phoneMatch && nameMatch) {
-      leadData.save = true;
-      leadData.phone = phoneMatch[0];
-      leadData.name = nameMatch[1];
-      leadData.problem = 'Собран ИИ автоматически';
-    }
-  }
   
   if (leadData.save && isValidLead(leadData.name, leadData.phone)) {
     try {
