@@ -494,10 +494,11 @@ ${context || 'Информация временно недоступна.'}`;
 - Имя и телефон проси ТОЛЬКО когда клиент сам проявил интерес (спросил цену, сказал «хочу», «запишите», «подключить» и т.п.) и ещё их не дал.
 - НЕ спрашивай имя/телефон в каждом сообщении. Если уже спрашивал и клиент не дал — не дави, продолжай помогать.
 - Когда клиент сам назвал имя И телефон — добавь в самом конце: [LEAD_SAVE][NAME:имя][PHONE:телефон][PROBLEM:суть]`;
-    { role: 'system', content: limitPrompt },
-    ...(history || []).slice(-10),
-    { role: 'user', content: message }
-  ];
+const messages = [
+  { role: 'system', content: limitPrompt },
+  ...(history || []).slice(-10),
+  { role: 'user', content: message }
+];
 
   const r = await fetch('https://openrouter.ai/api/v1/chat/completions', {
     method: 'POST',
